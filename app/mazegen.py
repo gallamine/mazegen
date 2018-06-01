@@ -1,4 +1,10 @@
+#### Blatantly stolen from:
+## https://github.com/boppreh/maze
+#####
+
+
 # -*- coding: utf-8 -*-
+# From 
 import random
 
 # Easy to read representation for each cardinal direction.
