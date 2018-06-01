@@ -71,14 +71,14 @@ class Maze(object):
                               'es': '┌',
                               'en': '└',
                               'ew': '─',
-                              'e': '╶',
+                              'e': '─',
                               'nsw': '┤',
                               'ns': '│',
                               'nw': '┘',
                               'sw': '┐',
                               's': '╷',
                               'n': '╵',
-                              'w': '╴'}
+                              'w': '─'}
 
     def __init__(self, width=20, height=10):
         """
