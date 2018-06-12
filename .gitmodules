@@ -1,0 +1,3 @@
+[submodule "app/mazelib"]
+	path = app/mazelib
+	url = git@github.com:gallamine/mazelib.git

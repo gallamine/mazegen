@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 zappa = "*"
 requests = "*"
+fpdf = "*"
+pillow = "*"
+mazelib = {git = "https://github.com/gallamine/mazelib.git", editable = true}
 
 [dev-packages]
 
