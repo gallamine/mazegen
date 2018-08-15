@@ -1,4 +1,11 @@
-# Deploy
+# MakeAMaze.com
+
+Serverles procedural maze generation.
+
+https://www.makeamaze.com/
+
+
+## Deploy
 
 ```
 zappa deploy
