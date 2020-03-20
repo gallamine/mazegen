@@ -18,7 +18,17 @@ def toHTML(grid, start, end, cell_size=20):
     print(start)
     print(end)
 
-    
+    google = """<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23135455-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23135455-2');
+</script>
+"""
+
     html = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"' + \
            '"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">' + \
            '<html xmlns="http://www.w3.org/1999/xhtml"><head>' + \
@@ -33,7 +43,9 @@ def toHTML(grid, start, end, cell_size=20):
            'div.maze_row div.gr{background-color: green;}' + \
            'div.maze_row div{float: left; }' + \
            'div.maze_row:after{content: ".";height: 0;visibility: hidden;display: block;clear: both;}' + \
-           '</style></head><body>' + \
+           '</style>' + \
+           google + \
+           '</head><body>' + \
            '<div id="maze">'
 
     for row in range(row_max):
