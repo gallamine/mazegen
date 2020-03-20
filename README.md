@@ -1,6 +1,6 @@
 # MakeAMaze.com
 
-Serverles procedural maze generation.
+procedural maze generation.
 
 https://www.makeamaze.com/
 
@@ -8,7 +8,7 @@ https://www.makeamaze.com/
 ## Deploy
 
 ```
-zappa deploy
+git push heroku
 ```
 
 ## Run local
@@ -16,3 +16,17 @@ zappa deploy
 ```
 FLASK_APP=hello.py flask run
 ```
+
+or 
+
+```
+heroku local
+```
+
+## Logs
+
+```bash
+heroku logs --tail
+```
+
+

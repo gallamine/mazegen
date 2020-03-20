@@ -27,11 +27,12 @@ def pdf_maze():
 
 	width = request.args.get('width', default = 12, type = int)
 	height = request.args.get('height', default = 12, type = int)
-	m = Maze.generate(width, height)
+	m = Maze()
+	m.generator = BacktrackingGenerator(height, width)
 
 	pdf = FPDF()
 	pdf.add_page()
-	pdf.set_font('Arial', 'B', 16, uni=True)
+	pdf.set_font('Arial', 'B', 16)
 	pdf.cell(40, 10, str(m))
 	pdf.output('tuto1.pdf', 'F')
 	with open('tuto1.pdf', 'rb') as f:
