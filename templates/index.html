@@ -9,19 +9,22 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!---- Unfurl stuff ---->
+
+  <meta property="og:url" content="https://www.makeamaze.com"/>
+  <meta property="og:title" content="Free random mazes"/>
+  <meta property="og:description" content="Generate a random maze to print and solve for free."/>
+  <meta property="og:site_name" content="Random Maze Generator"/>
+  <meta property=”og:image" content="/images/og/default.jpg"/>
+
 
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
+<link href='https://fonts.googleapis.com/css?family=Overpass Mono' rel='stylesheet'>
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/favicon.png">
@@ -31,9 +34,9 @@
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container">
-    <div class="row">
-      <div class="one-half column" style="margin-top: 25%">
+<section class="section">
+    <div class="container">
+
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     <ul class=flashes>
@@ -43,19 +46,12 @@
     </ul>
   {% endif %}
 {% endwith %}
-  <h1>Maze</h1>
-    <p>
-      Look at this
-    </p>
-    <p>
-  <pre>
+
+    
+  <pre> 
 {{ maze_repr }}
   </pre>
-    </p>
 
-      </div>
-    </div>
-  </div>
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
