@@ -9,6 +9,7 @@ requests = "*"
 fpdf = "*"
 pillow = "*"
 mazelib = {git = "https://github.com/gallamine/mazelib.git", editable = true}
+gunicorn = "*"
 
 [dev-packages]
 
