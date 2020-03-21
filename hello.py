@@ -30,7 +30,9 @@ def image_maze():
     m = Maze()
     m.generator = BacktrackingGenerator(height, width)
     m.solver = WallFollower()
-    m.generate_monte_carlo(10, 10, difficulty)
+    #m.generate_monte_carlo(10, 10, difficulty)
+    m.generate()
+    m.generate_entrances()
 
     imagebytes = md.render_image(m.grid, m.start, m.end)
 

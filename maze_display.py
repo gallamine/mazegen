@@ -39,15 +39,16 @@ def render_image(grid: List[List], start: Tuple, end: Tuple) -> io.BytesIO:
     for row in range(row_max):
         for col in range(col_max):
             if (row, col) == start:
-                pixels[row, col] = (row, col, 256)
+                pixels[row, col] = (row, col, 2)
             elif (row, col) == end:
-                pixels[row, col] = (row, col, 10)
-            elif grid[row][col]:
                 pixels[row, col] = (row, col, 100)
+            elif grid[row][col]:
+                pixels[row, col] = (row, col, 255)
 
     img = img.resize(
         (config.default_image_size[0] * config.default_image_dpi,
-        config.default_image_size[1] * config.default_image_dpi)
+        config.default_image_size[1] * config.default_image_dpi),
+        Image.NEAREST
     )
     img.save(buf, "PNG")
     buf.seek(0)
