@@ -1,6 +1,5 @@
-from flask import Flask
+from flask import Flask, Response
 from flask import request, render_template, make_response
-from app.mazegen import Maze
 import maze_display as md
 from mazelib import *
 
@@ -18,7 +17,27 @@ def hello():
 	m.solver = WallFollower()
 	m.generate_monte_carlo(10, 10, difficulty)
 
-	return md.toHTML(m.grid, m.start, m.end)
+	maze_html, maze_css = md.toHTML(m.grid, m.start, m.end)
+	return render_template("index.html", maze_repr=maze_html, html_css=maze_css)
+
+@app.route("/image")
+def image_maze():
+	width = request.args.get('width', default=20, type=int)
+	height = request.args.get('height', default=26, type=int)
+	difficulty = request.args.get('difficulty', default=1.0, type=float)
+
+	m = Maze()
+	m.generator = BacktrackingGenerator(height, width)
+	m.solver = WallFollower()
+	m.generate_monte_carlo(10, 10, difficulty)
+
+	imagebytes = md.showPNG(m.grid, m.start, m.end)
+
+	resp = Response(response=imagebytes,
+					status=200,
+					mimetype="image/png")
+	return resp
+
 
 @app.route("/pdf")
 def pdf_maze():

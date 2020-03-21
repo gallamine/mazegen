@@ -1,5 +1,7 @@
+from flask import Markup
+import io
 
-def showPNG(grid):
+def showPNGBad(grid):
 
     import matplotlib.pyplot as plt
 
@@ -7,7 +9,31 @@ def showPNG(grid):
     plt.figure(figsize=(10, 5))
     plt.imshow(grid, cmap=plt.cm.binary, interpolation='nearest')
     plt.xticks([]), plt.yticks([])
-    plt.show()
+    plt.save_fig(format="png")
+
+
+def showPNG(grid, start, end):
+    from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+    import matplotlib.figure
+    from matplotlib.figure import Figure
+    import matplotlib.patches as patches
+
+    fig = Figure(figsize=(9, 11), dpi=150)
+    canvas = FigureCanvas(fig)
+    ax = fig.add_axes([0.05, 0.05, .9, .9])         # [left, bottom, width, height] in fractions of width/height
+    print(f"{start} to {end}")
+    ax.imshow(grid, interpolation='nearest')
+
+    ax.annotate("end", (20,26))
+    ax.annotate("start", (2,2))
+    ax.set_xticks([])
+    ax.set_yticks([])
+    fig.suptitle("www. Make A Maze .com")
+
+    buf = io.BytesIO()
+    fig.savefig(buf, format='png')
+    buf.seek(0)
+    return buf.read()
 
 
 def toHTML(grid, start, end, cell_size=20):
@@ -18,22 +44,8 @@ def toHTML(grid, start, end, cell_size=20):
     print(start)
     print(end)
 
-    google = """<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23135455-2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'UA-23135455-2');
-</script>
-"""
-
-    html = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"' + \
-           '"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">' + \
-           '<html xmlns="http://www.w3.org/1999/xhtml"><head>' + \
-           '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />' + \
-           '<style type="text/css">' + \
+    html_css = Markup('<style type="text/css">' + \
            '#maze {width: ' + str(cell_size * col_max) + 'px;height: ' + \
            str(cell_size * row_max) + 'px;border: 3px solid grey;}' + \
            'div.maze_row div{width: ' + str(cell_size) + 'px;height: ' + str(cell_size) + 'px;}' + \
@@ -43,11 +55,9 @@ def toHTML(grid, start, end, cell_size=20):
            'div.maze_row div.gr{background-color: green;}' + \
            'div.maze_row div{float: left; }' + \
            'div.maze_row:after{content: ".";height: 0;visibility: hidden;display: block;clear: both;}' + \
-           '</style>' + \
-           google + \
-           '</head><body>' + \
-           '<div id="maze">'
+           '</style>')
 
+    html = ""
     for row in range(row_max):
         html += '<div class="maze_row">'
         for col in range(col_max):
@@ -60,6 +70,6 @@ def toHTML(grid, start, end, cell_size=20):
             else:
                 html += '<div class="wh"></div>'
         html += '</div>'
-    html += '</div></body></html>'
+    html += '</div>'
 
-    return html
+    return Markup(html), html_css

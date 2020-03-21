@@ -4,3 +4,4 @@ fpdf==1.7.2
 gunicorn==20.*
 -e git+https://github.com/gallamine/mazelib.git@ae89285e3966f5541ef0ccc2150a9876f8f5f9d1#egg=mazelib
 matplotlib
+Pillow
