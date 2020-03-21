@@ -1,7 +1,7 @@
 from flask import Markup
 import io
 from typing import List, Tuple
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 import config
 
 
@@ -39,16 +39,26 @@ def render_image(grid: List[List], start: Tuple, end: Tuple) -> io.BytesIO:
     for row in range(row_max):
         for col in range(col_max):
             if (row, col) == start:
-                pixels[row, col] = (row, col, 2)
+                pixels[row, col] = (row, col, 0)
             elif (row, col) == end:
-                pixels[row, col] = (row, col, 100)
+                pixels[row, col] = (row, col, 1)
             elif grid[row][col]:
                 pixels[row, col] = (row, col, 255)
 
     img = img.resize(
-        (config.default_image_size[0] * config.default_image_dpi,
-        config.default_image_size[1] * config.default_image_dpi),
-        Image.NEAREST
+        (
+            config.default_image_size[0] * config.default_image_dpi,
+            config.default_image_size[1] * config.default_image_dpi,
+        ),
+        Image.NEAREST,
+    )
+    draw = ImageDraw.Draw(img)
+    text = "www.Make A Maze.com"
+    draw.textsize(text)
+    draw.text(
+        (config.default_image_size[1] * config.default_image_dpi / 2, 0),
+        text,
+        fill="red",
     )
     img.save(buf, "PNG")
     buf.seek(0)
